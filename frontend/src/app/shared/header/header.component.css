@@ -1,0 +1,45 @@
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Aligne tout bien */
+    height: 70px;
+    width: 100%;
+    padding: 0 20px; /* Ajoute de l'espace sur les côtés */
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo-container img {
+    height: 50px; /* Augmente la taille du logo */
+    width: auto;
+}
+
+.nav-links {
+    display: flex;
+    gap: 40px; /* Espacement entre les liens */
+}
+.nav-link{
+    border-radius: 30px;
+}
+
+.logout-container {
+    display: flex;
+    align-items: center;
+    margin-left: auto; /*bouton est bien aligné */
+}
+
+.deconnexion {
+    height: 40px; /* Ajuste la hauteur du bouton */
+    display: flex;
+    align-items: center;
+    padding: 5px 15px;
+}
+.active-title {
+    border-bottom: 3px solid #df8020; /* Bordure bleue plus visible */
+    font-weight: bold;
+    transition: border-bottom 0.3s ease-in-out;
+}
+  

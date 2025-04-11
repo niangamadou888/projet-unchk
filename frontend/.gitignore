@@ -1,0 +1,53 @@
+# Node modules
+/node_modules/
+
+# npm logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Angular build output
+/dist/
+/out-tsc/
+
+# VSCode config files
+.vscode/
+
+# IDE specific files
+.idea/
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Environment files
+/src/environments/environment*.ts
+
+# Compiled output
+*.js
+*.map
+
+# Angular CLI cache
+.angular/
+
+# Build artifacts
+/bundle/
+
+# TypeScript specific
+*.tsbuildinfo
+
+# Docker file
+.docker/
+
+# Temporary files
+*.swp
+*.swo
+
+# Generated files
+*.tgz
+
+# Testing
+/coverage/
+
+# Production build
+prod/

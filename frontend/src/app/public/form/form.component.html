@@ -1,0 +1,45 @@
+<div class="card">
+    <header class="card-header" >
+        <div>
+            <img alt="" src="../assets/image/logo_uvs.png">
+        </div>
+        <div class="CI">
+            <button class="btn btn-success me-2"(click)="chooseConnection()" >Connexion</button>
+            <button class="btn btn-success me-1">inscription</button>
+        </div>
+    </header>
+    <body class="card-body">
+        <section>
+            <div>
+                <form #signupForm="ngForm" (ngSubmit)="form(signupForm)">
+                    <div class="mb-3">
+                        <label for="Name">Nom</label><br>
+                        <input type="text" name="userLastName" class="form-control" placeholder="Nom" ngModel required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="FirtName">Prenom</label><br>
+                        <input type="text" name="userFirstName" class="form-control" placeholder="Prenom" ngModel required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Email">Email</label><br>
+                        <input type="Email" name="userEmail" class="form-control" placeholder="Email" ngModel required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Password">Mot de passe</label><br>
+                        <input type="Password" name="userPassword" class="form-control" placeholder="Mdp" ngModel required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="C-Password">Confirmer mot de passe</label><br>
+                        <input type="Password" name="userConfirmPassword" class="form-control" placeholder="Mdp" ngModel required>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-success form-control ">S'incrire</button>
+                    </div>
+                </form>
+            </div>
+            <div>
+                <img src="../assets/image/logo_uvs.png" alt="">
+            </div>
+        </section>
+    </body>
+</div>

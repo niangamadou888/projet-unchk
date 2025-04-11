@@ -1,0 +1,40 @@
+
+
+<header class="card-header" >
+    <div class="navbar">
+      <img alt="" src="../assets/image/logo_uvs.png">
+      <ul>
+        <li><a (click)="chooseCompte()">Mon compte</a></li>
+        <li><a (click)="chooseCandidature()">Mes candidatures</a></li>
+        <li><a href="#">Notifications</a></li>
+      </ul>
+        <button class="btn btn-success me-2">Déconnexion</button>
+    </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+      <br><br><br><br><br><br><br>
+      <h1>POUR LE RECRUTEMENT DE TUTEUR</h1>
+      <p>UN-CHK</p>
+      <p>2023-2024</p>
+  </div>
+</section>
+
+<section class="annonces">
+  <div class="container">
+    <div *ngFor="let annonce of annonces" class="annonce">
+      <div class="img">
+        <img alt="" [src]="annonce.imageUrl">
+      </div>
+      <div class="text">
+        <h3>{{ annonce.titre }}</h3>
+        <p>{{ annonce.date }}</p>
+        <p>{{ annonce.description }}</p>
+        <br><br>
+        <a class="postuler" (click)="choosePostuler()">Postuler</a>
+      </div>
+    </div>
+  </div>
+</section>
+

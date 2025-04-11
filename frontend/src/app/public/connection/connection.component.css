@@ -1,0 +1,39 @@
+header{
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+header img{
+    height:30%;
+    width:30px ;
+    margin-left: 10px;
+}
+section{
+    background: rgba(255, 255, 255, 0.497); /* Transparence */
+    margin-left: 300px;
+    margin-top: 50px;
+    margin-bottom: 100px;
+    width:800px;
+    padding: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-left: solid 10px  #cb6f29;
+}
+form{
+    margin: 5% 10%;
+    }
+h2{
+    text-align: center;
+    color: green;
+}#a{
+    font-size: 20px;
+    color: #000;
+    margin-left: 300px;
+}
+body{
+    background-image: url('/assets/image/cas-bg.jpg');
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+}

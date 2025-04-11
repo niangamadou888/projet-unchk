@@ -1,0 +1,11 @@
+main {
+    flex: 1; /* Cela pousse le footer vers le bas */
+    overflow-y: auto; /* Permet de défiler si le contenu est long */
+    
+}
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}

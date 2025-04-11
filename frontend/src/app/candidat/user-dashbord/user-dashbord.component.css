@@ -1,0 +1,91 @@
+*{
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style: none;
+}
+
+.card-header{
+  background-color: #faf8f8;
+  border-bottom:solid 1px #010101;
+  top: 0;
+}
+.navbar{
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding-right: 20px;
+}
+a{
+  color: #010101;
+  margin: 0 30px;
+}
+li a:hover{
+  border-bottom: green solid 2px;
+  border-top: green solid 2px;
+  color: orangered;
+}
+header{
+  position:fixed;
+  width: 100%;
+}
+header img{
+  height:30px;
+  width:30px ;
+  margin-left: 10px;
+}
+
+.card-header ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: right;
+  display: flex;
+}
+
+nav li {
+  display: inline-block;
+  margin-left: 40px;
+  text-decoration: none;
+}
+
+.hero {
+  background-image: url('/assets/image/appele.png');
+  background-size: cover;
+  background-position: center;
+  color: rgb(253, 251, 251);
+  font-size: medium;
+  text-align: left;
+  padding: 150px 0;
+  padding-left: 40px;
+}
+
+.annonces {
+  padding: 40px 0;
+}
+
+.annonce {
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+  padding: 20px;
+  margin-left: 50px;
+  display: flex;
+}
+
+.annonce img{
+  height: 305px;
+  width: 305px;
+  border-radius: 17px;
+  margin-right: 20px;
+}
+.postuler {
+  display: inline-block;
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 20px;
+}
+

@@ -1,0 +1,31 @@
+
+<div class="card">
+    <header class="card-header" >
+        <div>
+            <img alt="" src="../assets/image/logo_uvs.png">
+        </div>
+        <div>
+            <button class="btn btn-success me-2">Connexion</button>
+            <button class="btn btn-success me-1"(click)="chooseInscription()" >inscription</button>
+        </div>
+    </header>
+    <body class="card-body">
+            <section>
+                <h2>SERVICE CENTRAL <br> D'AUTHENTIFICATION</h2>
+                <form #loginForm="ngForm" (ngSubmit)="connection(loginForm)" >
+                    <div class="mb-3">
+                        <label for="Email">Email</label><br>
+                        <input type="Email" name="userEmail" id="Email" class="form-control" placeholder="Email" ngModel>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Password">Mot de passe</label><br>
+                        <input type="Password" name="userPassword" id="Password" class="form-control" placeholder="Mdp" ngModel>
+                    </div>
+                    <div>
+                        <br><br>
+                        <button type="submit" class="btn btn-success form-control">Se Connecter</button>
+                    </div>
+                </form>
+                <a href="" id="a">Mot de passe oublié?</a>
+            </section>
+    </body>
