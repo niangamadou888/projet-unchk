@@ -24,6 +24,7 @@ import java.util.List;
 @Configuration
 @EnableMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfiguration {
+
     @Autowired
     private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
@@ -45,7 +46,7 @@ public class WebSecurityConfiguration {
         http
                 .csrf(csrf -> csrf.disable()) // Désactiver CSRF
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/authenticate", "/registerNewUser", "/forgot-password", "/reset-password").permitAll()
+                        .requestMatchers("/authenticate", "/registerNewUser","api/annonces", "api/candidatures", "api/annee-academique", "api/candidatures/soumettre","api/annee-academique/{id}","api/candidatures", "api/annonces/{id}", "/getUserInfo", "/updateUserInfo","/forgot-password", "/reset-password","api/candidatures/user/{userId}", "api/candidatures/annonce/{annonceId}").permitAll()
                         .requestMatchers(HttpHeaders.ALLOW).permitAll()
                         .anyRequest().authenticated()
                 )

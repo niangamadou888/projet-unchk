@@ -13,9 +13,40 @@ import java.util.function.Function;
 
 @Component
 public class JwtUtil {
-    private static final String SECRET_KEY = "2tfTcXGKJElkXYAg6wkoItkaseh+xoGE+pfIbBwkxAKvSK5j4m+YYYvP/4l6yt2w3Wk2TesKq8nv5ndQ3T2qJg==";
+
+    private static final String SECRET_KEY = "NYyiCwE1RpmyQvVNyUamz5CRdJJO13sSUDBdWDsO/7YArDAe7WaLuJj7cD06CJJOe589TTfzu6/4oRgBZj4rcQ==";
 
     private static final int TOKEN_VALIDITY = 3600 * 5;
+
+    // Extract the username (email) from the token
+    public String extractUsername(String token) {
+        return extractClaim(token, Claims::getSubject); // The subject typically holds the username or email
+    }
+
+    // Extract a claim from the token
+    private <T> T extractClaim(String token, ClaimsResolver<T> claimsResolver) {
+        final Claims claims = extractAllClaims(token);
+        return claimsResolver.resolve(claims);
+    }
+
+    // Extract all claims from the token
+    private Claims extractAllClaims(String token) {
+        return Jwts.parser()
+                .setSigningKey(SECRET_KEY)
+                .parseClaimsJws(token)
+                .getBody();
+    }
+
+    // Extract expiration date from the token
+    private java.util.Date extractExpiration(String token) {
+        return extractClaim(token, Claims::getExpiration);
+    }
+
+    // Interface for extracting claims (can be used for other claims like email, roles, etc.)
+    @FunctionalInterface
+    public interface ClaimsResolver<T> {
+        T resolve(Claims claims);
+    }
 
     public String getUsernameFromToken(String token) {
         return getClaimFromToken(token, Claims::getSubject);

@@ -1,13 +1,12 @@
 package com.project.projetunchk.Service;
 
+import com.project.projetunchk.Util.JwtUtil;
 import com.project.projetunchk.DAO.UserDAO;
 import com.project.projetunchk.Entity.JwtRequest;
 import com.project.projetunchk.Entity.JwtResponse;
 import com.project.projetunchk.Entity.User;
-import com.project.projetunchk.Util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
@@ -18,12 +17,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-
 import java.util.HashSet;
 import java.util.Set;
 
 @Service
 public class JwtService implements UserDetailsService {
+
     @Autowired
     private JwtUtil jwtUtil;
 
@@ -33,6 +32,16 @@ public class JwtService implements UserDetailsService {
     @Lazy
     @Autowired
     private AuthenticationManager authenticationManager;
+
+    public String extractUserEmailFromToken(String token) {
+        // This method will extract the email (or username) from the token
+        return jwtUtil.extractUsername(token);
+    }
+
+    public User getUserByToken(String token) throws UsernameNotFoundException {
+        String userEmail = extractUserEmailFromToken(token);
+        return userDao.findById(userEmail).orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + userEmail));
+    }
 
     public JwtResponse createJwtToken(JwtRequest jwtRequest) throws Exception {
         String userName = jwtRequest.getUserEmail();
@@ -49,9 +58,7 @@ public class JwtService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userDao.findById(username).get();
-        if (user.getSuspended()) {
-            throw new AccessDeniedException("User is suspended");
-        }
+
         if (user != null) {
             return new org.springframework.security.core.userdetails.User(
                     user.getUserEmail(),
