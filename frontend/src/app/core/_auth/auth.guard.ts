@@ -18,8 +18,8 @@ export const authGuard: CanActivateFn = (route, state) => {
       if(match){
         return true;
       }else{
-        router.createUrlTree(['/']);
-        return false;
+        // Redirect to notAuthorized page when role doesn't match
+        return router.createUrlTree(['/notAuthorized']);
       } 
     }
     router.createUrlTree(['/public/connection']);

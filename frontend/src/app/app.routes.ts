@@ -12,18 +12,13 @@ import { FormComponent } from './public/form/form.component';
 
 // Pages Candidat
 import { UserDashbordComponent } from './candidat/user-dashbord/user-dashbord.component';
-import { FormCandidatureComponent } from './candidat/form-candidature/form-candidature.component';
-import { CandidatureComponent } from './candidat/candidature/candidature.component';
 
 // Pages Admin
 import { AdminDashbordComponent } from './admin/admin-dashbord/admin-dashbord.component';
-import { GestionAnnoncesComponent } from './admin/gestion-annonces/gestion-annonces.component';
-import { FormulaireAnnonceComponent } from './admin/formulaire-annonce/formulaire-annonce.component';
-import { AjoutAnneeComponent } from './admin/ajout-annee/ajout-annee.component';
-import { GestionDossiersComponent } from './admin/gestion-dossiers/gestion-dossiers.component';
-import { ListeCandidatsComponent } from './admin/liste-candidats/liste-candidats.component';
 import { CompteComponent } from './candidat/compte/compte.component';
 import { authGuard } from './core/_auth/auth.guard';
+import { NotAuthorizedComponent } from './shared/components/not-authorized/not-authorized.component';
+import { AddCourseComponent } from './admin/add-course/add-course.component';
 
 export const routes: Routes = [
   // Layout Public
@@ -31,7 +26,8 @@ export const routes: Routes = [
     path: '', component: PublicLayoutComponent, children: [
       { path: '', component: HomeComponent },
       { path: 'connexion', component: ConnectionComponent },
-      { path: 'inscription', component: FormComponent }
+      { path: 'inscription', component: FormComponent },
+      { path: 'notAuthorized', component: NotAuthorizedComponent }
     ]
   },
 
@@ -39,8 +35,6 @@ export const routes: Routes = [
   {
     path: 'candidat', component: CandidatLayoutComponent, children: [
       { path: 'userDashbord', component: UserDashbordComponent, canActivate: [authGuard], data:{roles:['User']} },
-      { path: 'form-candidature', component: FormCandidatureComponent },
-      { path: 'candidature', component: CandidatureComponent },
       { path: 'compte' , component: CompteComponent}
     ]
   },
@@ -49,11 +43,7 @@ export const routes: Routes = [
   {
     path: 'admin', component: AdminLayoutComponent, children: [
       { path: 'admin-dashbord', component: AdminDashbordComponent, canActivate:[authGuard], data:{roles:['Admin']} },
-      { path: 'gestion-annonces', component: GestionAnnoncesComponent },
-      { path: 'formulaire-annonce', component: FormulaireAnnonceComponent },
-      { path: 'ajout-annee', component: AjoutAnneeComponent },
-      { path: 'gestion-dossiers', component: GestionDossiersComponent },
-      { path: 'liste-candidats', component: ListeCandidatsComponent }
+      { path: 'add-course', component: AddCourseComponent, canActivate:[authGuard], data:{roles:['Admin']} }
     ]
   },
 

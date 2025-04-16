@@ -3,12 +3,13 @@ import { UserService } from '../../core/_services/user.service';
 import { FormsModule, NgForm,} from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserAuthService } from '../../core/_services/user-auth.service';
+import { FooterComponent } from '../../shared/footer/footer.component';
 
 
 @Component({
   selector: 'app-connection',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, FooterComponent],
   templateUrl: './connection.component.html',
   styleUrl: './connection.component.css'
 })

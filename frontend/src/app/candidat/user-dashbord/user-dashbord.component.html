@@ -1,40 +1,104 @@
-
-
-<header class="card-header" >
-    <div class="navbar">
-      <img alt="" src="../assets/image/logo_uvs.png">
-      <ul>
-        <li><a (click)="chooseCompte()">Mon compte</a></li>
-        <li><a (click)="chooseCandidature()">Mes candidatures</a></li>
-        <li><a href="#">Notifications</a></li>
-      </ul>
-        <button class="btn btn-success me-2">Déconnexion</button>
+<div class="new-navbar">
+  <div class="navbar-container">
+    <div class="navbar-logo">
+      <img src="../assets/image/logo_uvs.png" alt="Logo">
+      <span class="brand-name">UN-CHK</span>
     </div>
-</header>
-
-<section class="hero">
-  <div class="container">
-      <br><br><br><br><br><br><br>
-      <h1>POUR LE RECRUTEMENT DE TUTEUR</h1>
-      <p>UN-CHK</p>
-      <p>2023-2024</p>
-  </div>
-</section>
-
-<section class="annonces">
-  <div class="container">
-    <div *ngFor="let annonce of annonces" class="annonce">
-      <div class="img">
-        <img alt="" [src]="annonce.imageUrl">
+    
+    <div class="navbar-links">
+      <div class="nav-item" [class.active]="activeTab === 'compte'" (click)="setActiveTab('compte'); chooseCompte()">
+        <span class="nav-icon">👤</span>
+        <span>Mon compte</span>
       </div>
-      <div class="text">
-        <h3>{{ annonce.titre }}</h3>
-        <p>{{ annonce.date }}</p>
-        <p>{{ annonce.description }}</p>
-        <br><br>
-        <a class="postuler" (click)="choosePostuler()">Postuler</a>
+      <div class="nav-item" [class.active]="activeTab === 'cours'" (click)="setActiveTab('cours')">
+        <span class="nav-icon">📚</span>
+        <span>Mes cours</span>
+      </div>
+      <div class="nav-item" [class.active]="activeTab === 'notifications'" (click)="setActiveTab('notifications')">
+        <span class="nav-icon">🔔</span>
+        <span>Notifications</span>
+        <div class="badge" *ngIf="notificationCount > 0">{{notificationCount}}</div>
       </div>
     </div>
+    
+    <div class="navbar-actions">
+      <div class="user-profile" (click)="toggleProfileMenu()">
+        <div class="avatar">
+          <img src="../assets/image/Depositphotos_484354208_S.jpg" alt="Profile">
+        </div>
+        <span class="user-name">{{userName}}</span>
+        <span class="nav-icon">▼</span>
+      </div>
+      
+      <div class="profile-menu" *ngIf="showProfileMenu">
+        <div class="menu-item">
+          <span class="nav-icon">⚙️</span>
+          <span>Paramètres</span>
+        </div>
+        <div class="menu-item" (click)="logout()">
+          <span class="nav-icon">🚪</span>
+          <span>Déconnexion</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="courses-section">
+  <div class="container">
+    <h2 class="section-title">Cours Disponibles</h2>
+    
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="loading-container">
+      <div class="spinner"></div>
+      <p>Chargement des cours...</p>
+    </div>
+    
+    <!-- Error State -->
+    <div *ngIf="error" class="error-container">
+      <p class="error-message">{{ error }}</p>
+      <button class="retry-button" (click)="loadCourses()">Réessayer</button>
+    </div>
+    
+    <div class="courses-grid" *ngIf="!isLoading && !error">
+      <div *ngFor="let course of courses" class="course-card">
+        <div class="course-image">
+          <img src="../assets/image/course-default.jpg" alt="Course">
+        </div>
+        <div class="course-content">
+          <h3 class="course-title">{{ course.titre }}</h3>
+          <p class="course-description">{{ course.description }}</p>
+          <div class="file-actions" *ngIf="course.courFile">
+            <button 
+              class="view-button" 
+              (click)="viewFile(course.id!)"
+              [disabled]="viewingFile === course.id"
+            >
+              <span *ngIf="viewingFile !== course.id">Voir PDF</span>
+              <span *ngIf="viewingFile === course.id" class="loading-text">
+                <span class="spinner"></span>
+                Ouverture...
+              </span>
+            </button>
+            <button 
+              class="download-button" 
+              (click)="downloadFile(course.id!)"
+              [disabled]="downloadingFile === course.id"
+            >
+              <span *ngIf="downloadingFile !== course.id">Télécharger PDF</span>
+              <span *ngIf="downloadingFile === course.id" class="loading-text">
+                <span class="spinner"></span>
+                Téléchargement...
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Empty State -->
+      <div *ngIf="courses.length === 0" class="empty-state">
+        <p>Aucun cours disponible actuellement.</p>
+      </div>
+    </div>
   </div>
 </section>
-

@@ -1,0 +1,1 @@
+export { NotAuthorizedComponent } from './not-authorized.component'; 

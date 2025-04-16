@@ -1,0 +1,78 @@
+<div class="add-course-container">
+  <div class="form-card">
+    <h2>Add New Course</h2>
+    
+    <!-- Error Message -->
+    <div *ngIf="error" class="error-message">
+      {{ error }}
+    </div>
+    
+    <form (ngSubmit)="onSubmit()" #courseForm="ngForm" [formGroup]="formGroup">
+      <div class="form-group">
+        <label for="title">Course Title</label>
+        <input 
+          type="text" 
+          id="title" 
+          name="titre" 
+          required 
+          formControlName="titre"
+          placeholder="Enter course title"
+          [disabled]="isSubmitting"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="description">Course Description</label>
+        <textarea 
+          id="description" 
+          name="description" 
+          formControlName="description"
+          required 
+          placeholder="Enter course description"
+          rows="4"
+          [disabled]="isSubmitting"
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="pdfFile">Course PDF</label>
+        <div class="file-upload-container">
+          <input 
+            type="file" 
+            id="pdfFile" 
+            name="courFile" 
+            (change)="onFileSelected($event)" 
+            accept=".pdf"
+            required
+            [disabled]="isSubmitting"
+          >
+          <div class="file-info" *ngIf="course.courFile">
+            Selected file: {{ course.courFile.name }}
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button 
+          type="button" 
+          class="cancel-button" 
+          (click)="cancel()"
+          [disabled]="isSubmitting"
+        >
+          Cancel
+        </button>
+        <button 
+          type="submit" 
+          class="submit-button" 
+          [disabled]="!courseForm.form.valid || isSubmitting"
+        >
+          <span *ngIf="!isSubmitting">Add Course</span>
+          <span *ngIf="isSubmitting" class="loading-text">
+            <span class="spinner"></span>
+            Adding...
+          </span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div> 

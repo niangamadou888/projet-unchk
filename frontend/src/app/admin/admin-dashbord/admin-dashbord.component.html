@@ -1,47 +1,67 @@
+<div class="dashboard-container">
+  <div class="header">
+    <h2>Course Management</h2>
+    <button class="logout-button" (click)="logout()">Logout</button>
+  </div>
 
-<Body>
-    <div class="corps container-fluid bg-light">
-        <div class="row">
-            <div class="col-sm-6 mb-3 mb-sm-0">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">En cours de traitement</h5>
-                  <p class="card-text">70</p>
-                  <a href="#" class="btn btn-warning">Voir Liste</a>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Acceptées</h5>
-                  <p class="card-text">35</p>
-                  <a href="#" class="btn btn-success">Voir Liste</a>
-                </div>
-              </div>
-            </div>
+  <div class="add-course-section">
+    <button class="add-course-button" (click)="addCourse()">
+      <i class="fas fa-plus"></i> Add New Course
+    </button>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading-container">
+    <div class="spinner"></div>
+    <p>Loading courses...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error" class="error-container">
+    <p class="error-message">{{ error }}</p>
+    <button class="retry-button" (click)="loadCourses()">Retry</button>
+  </div>
+
+  <!-- Courses List -->
+  <div class="courses-list" *ngIf="!isLoading && !error">
+    <div class="course-card" *ngFor="let course of courses">
+      <div class="course-content">
+        <h3 class="course-title">{{ course.titre }}</h3>
+        <p class="course-description">{{ course.description }}</p>
+        <div class="file-actions" *ngIf="course.courFile">
+          <button 
+            class="view-button" 
+            (click)="viewFile(course.id!)"
+            [disabled]="viewingFile === course.id"
+          >
+            <span *ngIf="viewingFile !== course.id">View PDF</span>
+            <span *ngIf="viewingFile === course.id" class="loading-text">
+              <span class="spinner"></span>
+              Opening...
+            </span>
+          </button>
+          <button 
+            class="download-button" 
+            (click)="downloadFile(course.id!)"
+            [disabled]="downloadingFile === course.id"
+          >
+            <span *ngIf="downloadingFile !== course.id">Download PDF</span>
+            <span *ngIf="downloadingFile === course.id" class="loading-text">
+              <span class="spinner"></span>
+              Downloading...
+            </span>
+          </button>
         </div>
-        <div class="row corps1">
-            <div class="col-sm-6 mb-3 mb-sm-0">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Refusées</h5>
-                  <p class="card-text">15</p>
-                  <a href="#" class="btn btn-danger">Voir Liste</a>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Total des candidatures</h5>
-                  <p class="card-text">120</p>
-                  <a href="#" class="btn btn-primary">Voir Liste</a>
-                </div>
-              </div>
-            </div>
-        </div>
+      </div>
+      <div class="course-actions">
+        <button class="delete-button" (click)="deleteCourse(course.id!)">Delete</button>
+      </div>
     </div>
 
-</Body>
+    <!-- Empty State -->
+    <div *ngIf="courses.length === 0" class="empty-state">
+      <p>No courses available. Click "Add New Course" to create one.</p>
+    </div>
+  </div>
+</div>
 
