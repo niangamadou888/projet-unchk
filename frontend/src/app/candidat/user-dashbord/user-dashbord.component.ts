@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AnnonceService } from '../../core/_services/annonce.service';
 import { CommonModule } from '@angular/common';
@@ -12,19 +12,20 @@ import { UserAuthService } from '../../core/_services/user-auth.service';
   templateUrl: './user-dashbord.component.html',
   styleUrl: './user-dashbord.component.css'
 })
-export class UserDashbordComponent {
+export class UserDashbordComponent implements OnInit {
   annonces: any[] = [];
   courses: Course[] = [];
   isLoading = true;
   error: string | null = null;
-  downloadingFile: number | null = null;
-  viewingFile: number | null = null;
+  downloadingFile: string | null = null;
+  viewingFile: string | null = null;
   
   // New navbar properties
-  activeTab = 'cours';
-  userName = 'Étudiant';
-  notificationCount = 2;
-  showProfileMenu = false;
+  activeTab: string = 'cours';
+  userName: string = 'Étudiant';
+  notificationCount: number = 2;
+  showProfileMenu: boolean = false;
+  showAccountSection: boolean = false;
 
   constructor(
     private router: Router,
@@ -78,7 +79,7 @@ export class UserDashbordComponent {
   }
 
   chooseCompte() {
-    this.router.navigate(['/candidat/compte']);
+    this.showAccountSection = true;
   }
   
   logout() {
@@ -106,11 +107,11 @@ export class UserDashbordComponent {
     window.URL.revokeObjectURL(url);
   }
 
-  downloadFile(courseId: number) {
+  downloadFile(courseId: string) {
     this.downloadingFile = courseId;
-    this.courseService.downloadFile(courseId).subscribe({
+    this.courseService.downloadFile(parseInt(courseId)).subscribe({
       next: (blob) => {
-        this.handleFileResponse(blob, courseId, 'download');
+        this.handleFileResponse(blob, parseInt(courseId), 'download');
         this.downloadingFile = null;
       },
       error: (err) => {
@@ -121,11 +122,11 @@ export class UserDashbordComponent {
     });
   }
 
-  viewFile(courseId: number) {
+  viewFile(courseId: string) {
     this.viewingFile = courseId;
-    this.courseService.downloadFile(courseId).subscribe({
+    this.courseService.downloadFile(parseInt(courseId)).subscribe({
       next: (blob) => {
-        this.handleFileResponse(blob, courseId, 'view');
+        this.handleFileResponse(blob, parseInt(courseId), 'view');
         this.viewingFile = null;
       },
       error: (err) => {

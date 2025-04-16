@@ -44,7 +44,7 @@
   </div>
 </div>
 
-<section class="courses-section">
+<section class="courses-section" *ngIf="activeTab === 'cours'">
   <div class="container">
     <h2 class="section-title">Cours Disponibles</h2>
     
@@ -102,3 +102,28 @@
     </div>
   </div>
 </section>
+
+<app-user-account *ngIf="activeTab === 'compte'"></app-user-account>
+
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h4>UN-CHK</h4>
+      <p>Plateforme de gestion des cours en ligne</p>
+    </div>
+    <div class="footer-section">
+      <h4>Contact</h4>
+      <p>Email: contact@un-chk.com</p>
+      <p>Téléphone: +221 XX XXX XX XX</p>
+    </div>
+    <div class="footer-section">
+      <h4>Liens utiles</h4>
+      <a href="#">Aide</a>
+      <a href="#">À propos</a>
+      <a href="#">Conditions d'utilisation</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2024 UN-CHK. Tous droits réservés.</p>
+  </div>
+</footer>
