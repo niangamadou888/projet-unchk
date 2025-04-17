@@ -1,0 +1,110 @@
+<div class="modify-account-container">
+  <div class="account-header">
+    <h2>Modifier mon compte</h2>
+    <p class="subtitle">Mettez à jour vos informations personnelles</p>
+  </div>
+
+  <!-- Loading State -->
+  <div class="loading-overlay" *ngIf="loading">
+    <div class="spinner"></div>
+    <p>Chargement...</p>
+  </div>
+
+  <!-- Error Message -->
+  <div class="error-message" *ngIf="error">
+    {{ error }}
+  </div>
+
+  <!-- Success Message -->
+  <div class="success-message" *ngIf="success">
+    {{ success }}
+  </div>
+
+  <!-- Profile Edit Form -->
+  <div class="account-info-card" *ngIf="!isChangingPassword && user">
+    <form (ngSubmit)="updateProfile()" #profileForm="ngForm">
+      <div class="profile-section">
+        <div class="avatar-container">
+          <img [src]=" '../assets/image/Depositphotos_484354208_S.jpg'" alt="Profile Picture">
+        </div>
+        
+        <div class="info-section">
+          <div class="info-group">
+            <label>Prénom</label>
+            <input 
+              type="text" 
+              [(ngModel)]="user.userFirstName" 
+              name="userFirstName" 
+              required
+              #firstNameInput="ngModel"
+            >
+            <div class="error-message" *ngIf="firstNameInput.invalid && firstNameInput.touched">
+              Le prénom est requis
+            </div>
+          </div>
+          
+          <div class="info-group">
+            <label>Nom</label>
+            <input 
+              type="text" 
+              [(ngModel)]="user.userLastName" 
+              name="userLastName" 
+              required
+              #lastNameInput="ngModel"
+            >
+            <div class="error-message" *ngIf="lastNameInput.invalid && lastNameInput.touched">
+              Le nom est requis
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions-section">
+        <button type="submit" class="save-btn" [disabled]="!profileForm.form.valid || loading">
+          <i class="fas fa-save"></i>
+          Enregistrer
+        </button>
+        <button type="button" class="cancel-btn" (click)="goBack()" [disabled]="loading">
+          <i class="fas fa-times"></i>
+          Annuler
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div class="account-info-card" *ngIf="isChangingPassword">
+    <form (ngSubmit)="submitPasswordChange()" #passwordForm="ngForm">
+      <div class="password-section">
+        <h3>Changer le mot de passe</h3>
+        <p class="instruction">Entrez votre email pour recevoir un lien de réinitialisation du mot de passe</p>
+        
+        <div class="form-group">
+          <label>Email</label>
+          <input 
+            type="email" 
+            [(ngModel)]="passwordResetEmail" 
+            name="email" 
+            required 
+            email
+            #emailInput="ngModel"
+          >
+          <div class="error-message" *ngIf="emailInput.invalid && emailInput.touched">
+            Veuillez entrer une adresse email valide
+          </div>
+        </div>
+      </div>
+
+      <div class="actions-section">
+        <button type="submit" class="save-btn" [disabled]="!passwordForm.form.valid || loading">
+          <i class="fas fa-paper-plane"></i>
+          Envoyer le lien
+        </button>
+        <button type="button" class="cancel-btn" (click)="cancelPasswordChange()" [disabled]="loading">
+          <i class="fas fa-times"></i>
+          Annuler
+        </button>
+      </div>
+    </form>
+  </div>
+
+</div> 

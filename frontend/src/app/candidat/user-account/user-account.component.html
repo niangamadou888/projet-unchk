@@ -1,4 +1,4 @@
-<div class="account-container">
+<div class="account-container mt-5">
   <div class="account-header">
     <h2>Mon Compte</h2>
     <p class="subtitle">Gérez vos informations personnelles</p>
@@ -7,24 +7,24 @@
   <div class="account-info-card">
     <div class="profile-section">
       <div class="avatar-container">
-        <img [src]="userAvatar || '../assets/image/default-avatar.png'" alt="Profile Picture">
+        <img [src]="userAvatar || '../assets/image/Depositphotos_484354208_S.jpg'" alt="Profile Picture">
         <button class="change-avatar-btn">Changer la photo</button>
       </div>
       
       <div class="info-section">
         <div class="info-group">
           <label>Prénom</label>
-          <p>{{user.firstName}}</p>
+          <p>{{user.userFirstName}}</p>
         </div>
         
         <div class="info-group">
           <label>Nom</label>
-          <p>{{user.lastName}}</p>
+          <p>{{user.userLastName}}</p>
         </div>
         
         <div class="info-group">
           <label>Email</label>
-          <p>{{user.email}}</p>
+          <p>{{user.userEmail}}</p>
         </div>
       </div>
     </div>

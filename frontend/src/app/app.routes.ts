@@ -9,9 +9,11 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { HomeComponent } from './public/home/home.component';
 import { ConnectionComponent } from './public/connection/connection.component';
 import { FormComponent } from './public/form/form.component';
+import { PasswordResetComponent } from './public/password-reset/password-reset.component';
 
 // Pages Candidat
 import { UserDashbordComponent } from './candidat/user-dashbord/user-dashbord.component';
+import { ModifyAccountComponent } from './candidat/modify-account/modify-account.component';
 
 // Pages Admin
 import { AdminDashbordComponent } from './admin/admin-dashbord/admin-dashbord.component';
@@ -19,6 +21,7 @@ import { CompteComponent } from './candidat/compte/compte.component';
 import { authGuard } from './core/_auth/auth.guard';
 import { NotAuthorizedComponent } from './shared/components/not-authorized/not-authorized.component';
 import { AddCourseComponent } from './admin/add-course/add-course.component';
+import { ModifyPasswordComponent } from './public/modify-password/modify-password.component';
 
 export const routes: Routes = [
   // Layout Public
@@ -27,6 +30,8 @@ export const routes: Routes = [
       { path: '', component: HomeComponent },
       { path: 'connexion', component: ConnectionComponent },
       { path: 'inscription', component: FormComponent },
+      { path: 'reset-password', component: PasswordResetComponent },
+      { path: 'modify-password', component: ModifyPasswordComponent },
       { path: 'notAuthorized', component: NotAuthorizedComponent }
     ]
   },
@@ -35,7 +40,8 @@ export const routes: Routes = [
   {
     path: 'candidat', component: CandidatLayoutComponent, children: [
       { path: 'userDashbord', component: UserDashbordComponent, canActivate: [authGuard], data:{roles:['User']} },
-      { path: 'compte' , component: CompteComponent}
+      { path: 'compte', component: CompteComponent, canActivate: [authGuard], data:{roles:['User']} },
+      { path: 'modify-account', component: ModifyAccountComponent, canActivate: [authGuard], data:{roles:['User']} }
     ]
   },
 

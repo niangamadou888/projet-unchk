@@ -63,7 +63,7 @@
     <div class="courses-grid" *ngIf="!isLoading && !error">
       <div *ngFor="let course of courses" class="course-card">
         <div class="course-image">
-          <img src="../assets/image/course-default.jpg" alt="Course">
+          <img [src]="getCourseImageUrl(course)" [alt]="course.titre">
         </div>
         <div class="course-content">
           <h3 class="course-title">{{ course.titre }}</h3>
@@ -71,22 +71,22 @@
           <div class="file-actions" *ngIf="course.courFile">
             <button 
               class="view-button" 
-              (click)="viewFile(course.id!)"
-              [disabled]="viewingFile === course.id"
+              (click)="viewFile(course.id!.toString())"
+              [disabled]="viewingFile === course.id?.toString()"
             >
-              <span *ngIf="viewingFile !== course.id">Voir PDF</span>
-              <span *ngIf="viewingFile === course.id" class="loading-text">
+              <span *ngIf="viewingFile !== course.id?.toString()">Voir PDF</span>
+              <span *ngIf="viewingFile === course.id?.toString()" class="loading-text">
                 <span class="spinner"></span>
                 Ouverture...
               </span>
             </button>
             <button 
               class="download-button" 
-              (click)="downloadFile(course.id!)"
-              [disabled]="downloadingFile === course.id"
+              (click)="downloadFile(course.id!.toString())"
+              [disabled]="downloadingFile === course.id?.toString()"
             >
-              <span *ngIf="downloadingFile !== course.id">Télécharger PDF</span>
-              <span *ngIf="downloadingFile === course.id" class="loading-text">
+              <span *ngIf="downloadingFile !== course.id?.toString()">Télécharger PDF</span>
+              <span *ngIf="downloadingFile === course.id?.toString()" class="loading-text">
                 <span class="spinner"></span>
                 Téléchargement...
               </span>
@@ -112,9 +112,17 @@
       <p>Plateforme de gestion des cours en ligne</p>
     </div>
     <div class="footer-section">
+ 
+
       <h4>Contact</h4>
-      <p>Email: contact@un-chk.com</p>
+ 
+
+      <p>Email: contact&#64;unchk.com</p>
+ 
+
       <p>Téléphone: +221 XX XXX XX XX</p>
+ 
+
     </div>
     <div class="footer-section">
       <h4>Liens utiles</h4>

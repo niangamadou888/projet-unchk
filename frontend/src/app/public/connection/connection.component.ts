@@ -46,5 +46,8 @@ export class ConnectionComponent {
       }
     );
   }
+  changePassword(): void {
+    this.router.navigate(['/reset-password']);
+  }
 }
 
