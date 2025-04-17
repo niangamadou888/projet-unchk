@@ -1,0 +1,143 @@
+<div class="new-navbar">
+  <div class="navbar-container">
+    <div class="navbar-logo">
+      <img src="../assets/image/logo_uvs.png" alt="Logo">
+      <span class="brand-name">UN-CHK</span>
+    </div>
+    
+    <div class="navbar-links">
+      <div class="nav-item" [class.active]="activeTab === 'compte'" (click)="navigateTo('compte')">
+        <span class="nav-icon">👤</span>
+        <span>Mon compte</span>
+      </div>
+      <div class="nav-item" [class.active]="activeTab === 'cours'" (click)="navigateTo('cours')">
+        <span class="nav-icon">📚</span>
+        <span>Mes cours</span>
+      </div>
+      <div class="nav-item" [class.active]="activeTab === 'forum'">
+        <span class="nav-icon">💬</span>
+        <span>Forum</span>
+      </div>
+      <div class="nav-item" [class.active]="activeTab === 'notifications'" (click)="navigateTo('notifications')">
+        <span class="nav-icon">🔔</span>
+        <span>Notifications</span>
+        <div class="badge" *ngIf="notificationCount > 0">{{notificationCount}}</div>
+      </div>
+    </div>
+    
+    <div class="navbar-actions">
+      <div class="user-profile" (click)="toggleProfileMenu()">
+        <div class="avatar">
+          <img src="../assets/image/Depositphotos_484354208_S.jpg" alt="Profile">
+        </div>
+        <span class="user-name">{{userName}}</span>
+        <span class="nav-icon">▼</span>
+      </div>
+      
+      <div class="profile-menu" *ngIf="showProfileMenu">
+        <div class="menu-item">
+          <span class="nav-icon">⚙️</span>
+          <span>Paramètres</span>
+        </div>
+        <div class="menu-item" (click)="logout()">
+          <span class="nav-icon">🚪</span>
+          <span>Déconnexion</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="forum-container">
+  <div class="forum-header">
+    <h2>Forum de Discussion</h2>
+    <p>Échangez avec les autres étudiants et posez vos questions.</p>
+  </div>
+
+  <!-- Message Input Section -->
+  <div class="new-message-section">
+    <div class="message-input-container">
+      <textarea 
+        [(ngModel)]="newMessage" 
+        placeholder="Écrivez votre message ici..." 
+        class="message-input"
+        [disabled]="isSubmitting"
+      ></textarea>
+      <button 
+        (click)="postMessage()" 
+        class="post-button" 
+        [disabled]="!newMessage.trim() || isSubmitting"
+      >
+        <span *ngIf="!isSubmitting">Publier</span>
+        <span *ngIf="isSubmitting" class="spinner-text">
+          <span class="spinner"></span>
+          Envoi...
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading-container">
+    <div class="spinner"></div>
+    <p>Chargement des messages...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error" class="error-container">
+    <p class="error-message">{{ error }}</p>
+    <button class="retry-button" (click)="loadMessages()">Réessayer</button>
+  </div>
+
+  <!-- Messages List -->
+  <div class="messages-container" *ngIf="!isLoading && !error">
+    <div *ngIf="messages.length === 0" class="empty-state">
+      <p>Aucun message dans le forum pour le moment. Soyez le premier à poster !</p>
+    </div>
+
+    <div *ngFor="let message of messages" class="message-card">
+      <div class="message-header">
+        <div class="user-info">
+          <div class="avatar">{{ message.name.charAt(0) }}</div>
+          <span class="user-name">{{ message.name }}</span>
+        </div>
+        <div class="message-actions">
+          <span class="message-date">{{ formatDate(message.createdAt) }}</span>
+          <button 
+            *ngIf="canDeleteMessage(message)" 
+            class="delete-button" 
+            (click)="deleteMessage(message.id)"
+          >
+            Supprimer
+          </button>
+        </div>
+      </div>
+      <div class="message-content">
+        <p>{{ message.message }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-section">
+      <h4>UN-CHK</h4>
+      <p>Plateforme de gestion des cours en ligne</p>
+    </div>
+    <div class="footer-section">
+      <h4>Contact</h4>
+      <p>Email: contact&#64;unchk.com</p>
+      <p>Téléphone: +221 XX XXX XX XX</p>
+    </div>
+    <div class="footer-section">
+      <h4>Liens utiles</h4>
+      <a href="#">Aide</a>
+      <a href="#">À propos</a>
+      <a href="#">Conditions d'utilisation</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2024 UN-CHK. Tous droits réservés.</p>
+  </div>
+</footer> 

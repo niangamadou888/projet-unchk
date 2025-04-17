@@ -14,6 +14,10 @@
         <span class="nav-icon">📚</span>
         <span>Mes cours</span>
       </div>
+      <div class="nav-item" [class.active]="activeTab === 'forum'" (click)="goToForum()">
+        <span class="nav-icon">💬</span>
+        <span>Forum</span>
+      </div>
       <div class="nav-item" [class.active]="activeTab === 'notifications'" (click)="setActiveTab('notifications')">
         <span class="nav-icon">🔔</span>
         <span>Notifications</span>
@@ -112,17 +116,9 @@
       <p>Plateforme de gestion des cours en ligne</p>
     </div>
     <div class="footer-section">
- 
-
       <h4>Contact</h4>
- 
-
       <p>Email: contact&#64;unchk.com</p>
- 
-
       <p>Téléphone: +221 XX XXX XX XX</p>
- 
-
     </div>
     <div class="footer-section">
       <h4>Liens utiles</h4>

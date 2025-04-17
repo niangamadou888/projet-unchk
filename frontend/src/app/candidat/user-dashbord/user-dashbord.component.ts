@@ -129,6 +129,10 @@ export class UserDashbordComponent implements OnInit {
     this.setActiveTab('compte');
   }
   
+  goToForum() {
+    this.router.navigate(['/candidat/forum']);
+  }
+  
   logout() {
     this.userAuthService.clear();
     this.router.navigate(['/']);

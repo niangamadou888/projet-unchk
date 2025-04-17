@@ -54,6 +54,10 @@ export class AdminDashbordComponent implements OnInit {
     this.router.navigate(['/admin/add-course']);
   }
 
+  goToForum() {
+    this.router.navigate(['/admin/forum']);
+  }
+
   deleteCourse(courseId: number) {
     if (confirm('Are you sure you want to delete this course?')) {
       this.courseService.deleteCourse(courseId).subscribe({
